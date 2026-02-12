@@ -59,8 +59,8 @@ export function Hero() {
         <Collage scrollYProgress={scrollYProgress} />
       </div>
 
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/4 h-[0.5px] bg-white/20"></div>
-      <div className="absolute bottom-12 left-0 w-full text-xs text-center text-neutral-500 uppercase tracking-widest z-30 pointer-events-none">
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/4 h-[0.5px] bg-white/20 hidden md:block"></div>
+      <div className="w-full text-xs text-center text-neutral-500 uppercase tracking-widest z-30 pointer-events-none relative mt-24 pb-8 md:pb-0 md:mt-0 md:absolute md:bottom-12 md:left-0">
         New Braunfels
         <br />
         Est. 2024

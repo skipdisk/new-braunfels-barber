@@ -116,7 +116,7 @@ export function Collage({ scrollYProgress }: CollageProps) {
       {/* Click hint */}
       <motion.div
         style={{ opacity: useTransform(scrollYProgress, [0, 0.2], [1, 0]) }}
-        className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-xs uppercase tracking-widest text-neutral-500 pointer-events-none"
+        className="absolute -bottom-2 left-1/2 -translate-x-1/2 text-xs uppercase tracking-widest text-neutral-500 pointer-events-none"
       >
         Click to flip
       </motion.div>
