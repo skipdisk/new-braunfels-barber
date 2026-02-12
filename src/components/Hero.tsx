@@ -145,7 +145,7 @@ function SyncedTypingText({
             <motion.span
               variants={child}
               key={charIndex}
-              className="inline-block"
+              className="inline-block will-change-[opacity,transform]"
             >
               {char === " " ? "\u00A0" : char}
             </motion.span>

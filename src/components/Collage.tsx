@@ -88,7 +88,7 @@ export function Collage({ scrollYProgress }: CollageProps) {
                 damping: 30,
                 layout: { duration: 0.3 },
               }}
-              className={`absolute w-3/4 aspect-[3/4] bg-neutral-800 border-4 border-black/50 shadow-2xl overflow-hidden cursor-pointer
+              className={`absolute w-3/4 aspect-[3/4] bg-neutral-800 border-4 border-black/50 shadow-2xl overflow-hidden cursor-pointer will-change-transform
                 ${index === 0 ? "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-[1.02]" : ""}
                 ${index === 1 ? "bottom-10 left-10 w-2/3 origin-bottom-left" : ""}
                 ${index === 2 ? "top-10 right-0 w-2/3 origin-bottom-right" : ""}
@@ -102,6 +102,9 @@ export function Collage({ scrollYProgress }: CollageProps) {
               <motion.img
                 src={img.src}
                 alt={img.alt}
+                // @ts-ignore - fetchPriority is valid but not yet in all React types
+                fetchPriority={index === 0 ? "high" : "auto"}
+                loading={index === 0 ? "eager" : "lazy"}
                 className={`w-full h-full object-cover transition-all duration-500 ${index === 0 ? "grayscale-0" : "grayscale opacity-60"}`}
                 layout // Animate image content adjustments
               />
