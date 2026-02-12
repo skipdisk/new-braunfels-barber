@@ -54,12 +54,13 @@ export function Hero() {
       </div>
 
       {/* Right Collage */}
-      <div className="w-full md:w-1/2 h-[60vh] md:h-screen relative flex items-center justify-center z-10 pointer-events-none md:pointer-events-auto">
+      {/* Right Collage */}
+      <div className="w-full md:w-1/2 h-[60vh] md:h-screen relative flex items-center justify-center z-10 pointer-events-auto">
         <Collage scrollYProgress={scrollYProgress} />
       </div>
 
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/4 h-[0.5px] bg-white/20"></div>
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-xs text-center text-neutral-500 uppercase tracking-widest">
+      <div className="absolute bottom-12 left-0 w-full text-xs text-center text-neutral-500 uppercase tracking-widest z-30 pointer-events-none">
         New Braunfels
         <br />
         Est. 2024

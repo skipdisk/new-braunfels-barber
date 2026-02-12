@@ -11,28 +11,28 @@ export function Gallery() {
       title: "Cut",
       span: "col-span-2 row-span-2",
       delay: "",
-      src: "https://images.unsplash.com/photo-1619233543640-af09c173763b?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      src: "https://images.unsplash.com/photo-1619233543640-af09c173763b?q=80&w=800&auto=format&fit=crop",
     },
     {
       id: "shave",
       title: "Shave",
       span: "",
       delay: "delay-75",
-      src: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      src: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=800&auto=format&fit=crop",
     },
     {
       id: "style",
       title: "Style",
       span: "",
       delay: "delay-100",
-      src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2070&auto=format&fit=crop",
+      src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=800&auto=format&fit=crop",
     },
     {
       id: "shop",
       title: "Shop",
       span: "col-span-2",
       delay: "delay-150",
-      src: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop",
+      src: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=800&auto=format&fit=crop",
     },
   ];
 
