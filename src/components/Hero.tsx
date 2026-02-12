@@ -1,52 +1,156 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useAnimation } from "framer-motion";
+import { useRef, useEffect } from "react";
+import { Collage } from "./Collage";
 
 export function Hero() {
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black text-white flex flex-col justify-center px-6 md:px-12">
-      {/* Background Image Placeholder - Replace with actual image */}
-      <div className="absolute inset-0 bg-neutral-900 z-0 opacity-40">
-         {/* <img src="/path/to/hero.jpg" alt="Barber shop interior" className="w-full h-full object-cover" /> */}
-      </div>
+    <section className="relative min-h-screen w-full text-white flex flex-col md:flex-row overflow-hidden">
+      {/* Left Content */}
+      <div className="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-12 2xl:px-24 pt-32 md:pt-0 relative z-20">
+        <div className="max-w-xl md:max-w-2xl 2xl:max-w-4xl">
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-5xl md:text-8xl 2xl:text-[12rem] font-extrabold tracking-tighter uppercase leading-[0.9]"
+          >
+            Fresh & <br />
+            <span className="font-extralight italic font-serif lowercase">
+              Faded
+            </span>
+          </motion.h1>
 
-      <div className="z-10 max-w-4xl pt-20">
-        <motion.h1 
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter uppercase leading-[0.9]"
-        >
-          Trim & <br/>
-          <span className="font-extralight italic font-serif lowercase">Tonic</span>
-        </motion.h1>
+          <div className="mt-8 text-neutral-400 max-w-sm text-sm md:text-base uppercase tracking-widest border-l border-white/20 pl-4 py-2 min-h-[80px]">
+            <SyncedTypingText
+              lines={[
+                "Your chair is waiting.",
+                "Your transformation begins now.",
+              ]}
+              delay={1.0}
+            />
+          </div>
 
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="mt-8 text-neutral-400 max-w-md text-sm md:text-base uppercase tracking-widest border-l border-white/20 pl-4 py-2"
-        >
-          Your chair is waiting. <br/> 
-          Your transformation begins now.
-        </motion.p>
-        
-        <motion.div
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.0, duration: 0.5 }}
             className="mt-12"
-        >
-            <a href="#" className="inline-block bg-white text-black px-8 py-4 font-bold tracking-widest uppercase hover:bg-neutral-200 transition-colors">
-                Book Now
+          >
+            <a
+              href="https://getsquire.com/discover/barbershop/new-braunfels-barber-new-braunfels?hl=en-US&gei=YjqNadTtHZO6qtsPxPLn-QQ&rwg_token=AFd1xnGN7cCNBQ-sYKDYH8E5m-Nvfwa_rJCk5fqCxe9lceiyn7dPslQwXzJPFBHEOeStWd-jXoj-_ThS0_IUpRdc_ngIzBpcaQ%3D%3D"
+              target="_blank"
+              className="inline-block bg-white text-black px-8 py-4 font-bold tracking-widest uppercase hover:bg-neutral-200 transition-colors"
+            >
+              Book Now
             </a>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Decorative lines/elements based on inspiration */}
-      <div className="absolute bottom-0 right-0 w-1/3 h-[1px] bg-white/20"></div>
-      <div className="absolute bottom-12 right-12 hidden md:block text-xs text-right text-neutral-500 uppercase tracking-widest">
-         New Braunfels<br/>
-         Est. 2024
+      {/* Right Collage */}
+      <div className="w-full md:w-1/2 h-[60vh] md:h-screen relative flex items-center justify-center z-10 pointer-events-none md:pointer-events-auto">
+        <Collage scrollYProgress={scrollYProgress} />
+      </div>
+
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/4 h-[0.5px] bg-white/20"></div>
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-xs text-center text-neutral-500 uppercase tracking-widest">
+        New Braunfels
+        <br />
+        Est. 2024
       </div>
     </section>
+  );
+}
+
+function SyncedTypingText({
+  lines,
+  delay = 0,
+}: {
+  lines: string[];
+  delay?: number;
+}) {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const sequence = async () => {
+      // Initial delay before first run
+      if (delay > 0) await new Promise((r) => setTimeout(r, delay * 1000));
+
+      while (isMounted) {
+        // Type in - using "visible" state
+        await controls.start("visible");
+        // Wait reading time (4s)
+        await new Promise((r) => setTimeout(r, 4000));
+        // Fade out - using "hidden" state
+        await controls.start("hidden");
+        // Wait before restart (1s)
+        await new Promise((r) => setTimeout(r, 1000));
+      }
+    };
+
+    sequence();
+
+    return () => {
+      isMounted = false;
+      controls.stop();
+    };
+  }, [controls, delay]);
+
+  const container = {
+    hidden: {
+      opacity: 0,
+      transition: {
+        // When hiding, do it quickly and simultaneously
+        duration: 0.5,
+        staggerChildren: 0,
+        delayChildren: 0,
+        when: "afterChildren", // Ensure children fade out first/together
+      },
+    },
+    visible: (customIndex: number = 0) => ({
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: customIndex * 1.5, // Stagger the second line by 1.5s relative to start
+      },
+    }),
+  };
+
+  const child = {
+    hidden: { opacity: 0, y: 5, transition: { duration: 0.3 } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.1 } },
+  };
+
+  return (
+    <div>
+      {lines.map((text, lineIndex) => (
+        <motion.div
+          key={lineIndex}
+          custom={lineIndex}
+          variants={container}
+          initial="hidden"
+          animate={controls}
+          className="block min-h-[1.5em]"
+        >
+          {Array.from(text).map((char, charIndex) => (
+            <motion.span
+              variants={child}
+              key={charIndex}
+              className="inline-block"
+            >
+              {char === " " ? "\u00A0" : char}
+            </motion.span>
+          ))}
+        </motion.div>
+      ))}
+    </div>
   );
 }

@@ -7,7 +7,7 @@ export function Header() {
 
   const navLinks = [
     { name: "Services", href: "#services" },
-    { name: "Masters", href: "#masters" },
+    { name: "Barbers", href: "#barbers" },
     { name: "Philosophy", href: "#philosophy" },
     { name: "Gallery", href: "#gallery" },
     { name: "Contact", href: "#contact" },
@@ -16,9 +16,9 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 py-6 px-6 md:px-12">
       <div className="flex justify-between items-center mix-blend-difference text-white relative z-50">
-        <div className="text-2xl font-bold tracking-tighter uppercase">
-          NB Barber
-        </div>
+        <a href="#" className="block hover:opacity-80 transition-opacity">
+          <img src="/logo.svg" alt="NB Barber" className="h-12 w-auto" />
+        </a>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-8 text-sm font-medium tracking-wide">

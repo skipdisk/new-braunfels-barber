@@ -5,12 +5,14 @@ import { Barbers } from "./components/Barbers";
 import { Philosophy } from "./components/Philosophy";
 import { Gallery } from "./components/Gallery";
 import { Footer } from "./components/Footer";
+import { GeometricBackground } from "./components/GeometricBackground";
 
 function App() {
   return (
-    <div className="min-h-screen bg-black text-white font-sans selection:bg-white selection:text-black">
+    <div className="min-h-screen bg-neutral-100 text-white font-sans selection:bg-white selection:text-black relative">
+      <GeometricBackground />
       <Header />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <Services />
         <Barbers />
